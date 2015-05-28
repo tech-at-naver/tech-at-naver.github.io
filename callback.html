@@ -1,25 +1,40 @@
-<script type="text/javascript">
-    var tokenInfo = {
-        access_token : "",
-        refresh_token : ""
-    };
-    function checkLoginState() {
-        var state = $.cookie("state_token");
-        if (naver.checkAuthorizeState(state) === "connected") {
-            // 정상적으로 콜백 정보가 전달되었을 경우 접근 토큰 발급 요청 수행
-            naver.getAccessToken(function(data) {
-                var response = data._response.responseJSON;
-                if (response.error === "fail") {
-                    // 접근 토큰 생성 요청이 실패했을 경우에 대한 처리
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="jquery.cookie.js"></script>
+        <!-- JavaScript용 네이버 아이디로 로그인 SDK -->
+        <script type="text/javascript" charset="utf-8" src="https://static.nid.naver.com/js/naverLogin.js"></script>
+
+    </head>
+    <body>
+        <script type="text/javascript">
+            var tokenInfo = {
+                access_token : "",
+                refresh_token : ""
+            };
+            function checkLoginState() {
+                var state = $.cookie("state_token");
+                if (naver.checkAuthorizeState(state) === "connected") {
+                    // 정상적으로 콜백 정보가 전달되었을 경우 접근 토큰 발급 요청 수행
+                    naver.getAccessToken(function(data) {
+                        var response = data._response.responseJSON;
+                        if (response.error === "fail") {
+                            // 접근 토큰 생성 요청이 실패했을 경우에 대한 처리
+                            return;
+                        }
+                        tokenInfo.access_token = response.access_token;
+                        tokenInfo.refresh_token = response.refresh_token;
+                        console.log("success to get access token", response);
+                    });
+                } else {
+                    // 콜백으로 전달된 데이터가 정상적이지 않을 경우에 대한 처리
                     return;
                 }
-                tokenInfo.access_token = response.access_token;
-                tokenInfo.refresh_token = response.refresh_token;
-                console.log("success to get access token", response);
-            });
-        } else {
-            // 콜백으로 전달된 데이터가 정상적이지 않을 경우에 대한 처리
-            return;
-        }
-    }
-</script>
+            }
+        </script>
+    </body>
+</html>
