@@ -19,6 +19,8 @@
             function checkLoginState() {
                 var state = $.cookie("state_token");
                 if (naver.checkAuthorizeState(state) === "connected") {
+                    console.log("success to get authorization code");
+                    
                     // 정상적으로 콜백 정보가 전달되었을 경우 접근 토큰 발급 요청 수행
                     naver.getAccessToken(function(data) {
                         var response = data._response.responseJSON;
