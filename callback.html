@@ -11,7 +11,7 @@
 
     </head>
     <body>
-        
+        <div id="callback">Message</div>
         <script type="text/javascript">
             var tokenInfo = {
                 access_token : "",
@@ -44,8 +44,8 @@
                 }
             }
             
-            
+            document.getElementById("callback").onload = checkLoginState;
         </script>
-        <div id="callback" onload="checkLoginState();">Message</div>
+        
     </body>
 </html>
