@@ -19,6 +19,7 @@
             };
             function checkLoginState() {
                 var state = $.cookie("state_token");
+                document.getElementById("callback").innerHTML = state;
                 if (naver.checkAuthorizeState(state) === "connected") {
                     
                     //console.log("success to get authorization code");
