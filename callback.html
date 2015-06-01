@@ -18,6 +18,7 @@
                 refresh_token : ""
             };
             function checkLoginState() {
+                document.getElementById("callback").innerHTML = "function called";
                 var state = $.cookie("state_token");
                 document.getElementById("callback").innerHTML = state;
                 if (naver.checkAuthorizeState(state) === "connected") {
