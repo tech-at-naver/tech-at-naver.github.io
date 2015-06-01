@@ -12,6 +12,7 @@
     </head>
     <body>
         <div id="callback">Message</div>
+        <button id="myBtn">Button</button>
         <script type="text/javascript">
             var tokenInfo = {
                 access_token : "",
@@ -44,7 +45,7 @@
                 }
             }
             
-            document.getElementById("callback").onload = checkLoginState;
+            document.getElementById("myBtn").onclick = checkLoginState;
         </script>
         
     </body>
